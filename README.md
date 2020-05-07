@@ -37,7 +37,7 @@ Some reddit users figured out a way to stream to RPAN (Reddit's livestreaming pl
 
 ## Installation  
 There's 2 ways to install Snookey2:  
-Method 1 (Recommended) - Do the pip install command listed at the top of the page!  
+Method 1 (Recommended) - Do pip install snookey2
 Method 2 (Not really recommended unless you want the code for it) - Go to the Github page and download the .py file there!
 
 ## Using Snookey2  
