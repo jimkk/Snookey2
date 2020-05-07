@@ -18,6 +18,7 @@ Added:
 - Discord Rich Presence
 - More text in general
 - More descriptive and better looking text
+- Finally figured out how to make it a module lmao
 - Auto closes when getting a stream spot is successful after 1 minute
 - Retries every 2 seconds if requesting a stream spot fails with error message
 - Made the icon of the app the RPAN logo!
@@ -30,65 +31,48 @@ Added:
 
 The text and stuff below was originally made by u/Spikeedoo (with some modifications from me):
 
-# SnooKey2
+# Snookey2
 Some reddit users figured out a way to stream to RPAN (Reddit's livestreaming platform) from desktop streaming software 
 (like OBS).  Project SnooKey is my attempt at making this possibilty more accessible to RPAN users.
 
-## START HERE
-### Method 1 (Windows only)
-If you have a Windows machine, you can run SnooKey without installing python by simply going into the Releases tab and downloading the latest version, and running Snookey.
+## Installation  
+There's 2 ways to install Snookey2:  
+Method 1 (Recommended) - Do the pip install command listed at the top of the page!  
+Method 2 (Not really recommended unless you want the code for it) - Go to the Github page and download the .py file there!
 
-### Method 2 (All platforms)
-For this to work you will need Python3 installed to your system.      
-*IF YOUR TERMINAL THINKS 'PYTHON' IS NOT A COMMAND, PYTHON HAS MOST LIKELY NOT BEEN ADDED TO YOUR PATH*     
-[Install Python for Windows](https://realpython.com/installing-python/#windows)   
-[Install Python for Linux](https://realpython.com/installing-python/#linux)   
-[Install Python for OS X](https://realpython.com/installing-python/#macos-mac-os-x)   
-Make sure the python requests module is installed for the script to work:
-```
-pip install requests
-```
-```
-pip install pytz
-```
-```
-pip install pypresence
-'''
-## Installation
-Just click on the Releases tab and download the latest version.
+## Using Snookey2  
+This covers Method 1 of the Installation.  
+Method 2 will not be covered here for simplicity.
 
-## Using SnooKey2
-Once you have SnooKey downloaded, it is time to run the script.     
-(**If you have a Windows computer (Method #1) simply run ```snookey2_v(version number).exe```**)
-```
-python snookey2.py
-```
-This will open a link in your browser allowing you to get an access code from Reddit    
+After doing the pip install command for Snookey2, go into command prompt and type this command:  
+snookey stream subreddit title  
+But replace subreddit with the subreddit and title with the stream title.
+
+If done correctly, this will open a link in your browser allowing you to get an access code from Reddit     
 **NOTE:** The Reddit app you are allowing access is not mine.  It is the client_id for the mobile, in this case android, Reddit app.    
-One way you can confirm that I am not BS'ing you is by looking at [your apps](https://www.reddit.com/prefs/apps/) after allowing access.
-A third party application would normally appear here in the 'authorized applications' section with the developer's username.  This Reddit-built
+One way you can confirm that I am not BS'ing you is by looking at [your apps](https://www.reddit.com/prefs/apps/) after allowing access.  
+A third party application would normally appear here in the 'authorized applications' section with the developer's username.  This Reddit-built  
 application does not follow the same rules.   
 
-Copy the access token from the localhost callback url and reply to the prompt in your terminal:
-```
-Please enter your access token: <enter access token here>
-```
-Follow the next two prompts by passing the subreddit you want to broadcast to and your stream's title:
-```
-Subreddit you want to broadcast to: <i.e. distantsocializing>
-Stream title: <i.e. RPAN and chill!>
-```
-If all goes well you will be given your streamer key and the rpan link people will visit your stream from.
-
-## How to use your streamer key
-Step 1: Open up your desktop streaming software (in my example, OBS)      
-Step 2: Navigate to your stream settings (Settings > Stream in OBS)    
-Step 3: Make sure your Service is set to 'Custom' and fill in the following settings:
-- Server: rtmp://ingest.redd.it/inbound/
-- Stream Key: (your stream key)
-
-Now hit 'Apply' and 'OK'
-
-Hit 'Start Streaming' and watch the magic happen!
+Just follow what the script says by reading the text, and follow the video tutorial or join the Discord server!  
+https://discord.gg/RZEYdn7
 
 Disclaimer: I am not liable for your stupidity.  Please be responsible and follow the [Rules](https://www.redditinc.com/policies/broadcasting-content-policy).  Cheers.  
+
+## Using Snookey2 in a Python Script  
+So if you really want to, you can use Snookey2 in a Python script for whatever you're making!
+
+First you have to do import snookey2 and you're set to do any of these commands!  
+(The prefix for all of these commands is snookey2 so for example snookey2.commandhere)  
+
+List of currently available functions:  
+drp() - Enables Discord Rich Presence, so dont include it if you dont want it.  
+info() - Info about Snookey2  
+sublist() - Gives a list of all the supported subreddits  
+tutorial() - Opens up the video tutorial  
+discord() - Opens up the invite link to the Discord  
+init(subreddit, title) - Actually run Snookey2  
+
+and with that, Snookey2 is now a Python module to celebrate v3.0!
+
+(Make sure to join the Discord for any questions!)
