@@ -56,7 +56,7 @@ If that doesn't work, make sure your Python is added to PATH if you're on Window
 
 After doing the pip install command for Snookey2, go into command prompt and type this command:  
 
-'''snookey stream subreddit title'''
+```snookey stream subreddit title```
 
 But replace subreddit with the subreddit and title with the stream title.
 
