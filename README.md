@@ -35,7 +35,7 @@ Some reddit users figured out a way to stream to RPAN (Reddit's livestreaming pl
 
 ## Installation  
 There's 2 ways to install Snookey2:  
-Method 1 (Recommended) - Do pip install snookey2  
+Method 1 (Recommended) - Install Python and do pip install snookey2 (follow the guide below!)  
 Method 2 (Not really recommended unless you want the code for it) - Go to the Github page and download the .py file there!
 
 ## Using Snookey2  
@@ -52,7 +52,12 @@ If that command doesn't work then try this command:
 
 ```python3 -m pip install snookey2```
 
-If that doesn't work, make sure your Python is added to PATH if you're on Windows, or download Pip. You can search up how to install Pip to whatever system you're using. If you have any other errors, there's always an answer on Google for it!
+If that doesn't work, it's mostly because of one of these problems:  
+1. You didn't set Python to PATH (Windows)
+2. Pip isn't set in PATH (Windows)
+3. Pip didn't get downloaded (All Platforms)
+
+Search up guides of your error or one of these problems to solve it, as I won't be going into how to fix them in this guide.
 
 After doing the pip install command for Snookey2, go into command prompt and type this command:  
 
@@ -69,6 +74,16 @@ For example:
 If your stream title is only one word, you don't need quotation marks.
 
 ```snookey stream thegamerlounge onewordtitle```
+
+You can also view your stream chat (or someone else's stream chat) with this new command:
+
+```snookey chat subreddit streamid```
+
+The Stream ID can be found in the stream's URL and it's the 6 characters after the last /.
+
+Make sure to do  
+```snookey commands```  
+if you want to know what all the commands are!
 
 If done correctly, this will open a link in your browser allowing you to get an access code from Reddit     
 **NOTE:** The Reddit app you are allowing access is not mine.  It is the client_id for the mobile, in this case android, Reddit app.    
@@ -93,6 +108,7 @@ info() - Info about Snookey2
 sublist() - Gives a list of all the supported subreddits  
 tutorial() - Opens up the video tutorial  
 discord() - Opens up the invite link to the Discord  
+chat(subreddit, streamid) - Get the live stream chat on a stream (doesn't have to be yours)
 init(subreddit, title) - Actually run Snookey2  
 
 and with that, Snookey2 is now a Python module to celebrate v3.0!
