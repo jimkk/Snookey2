@@ -55,7 +55,9 @@ If that command doesn't work then try this command:
 If that doesn't work, make sure your Python is added to PATH if you're on Windows, or download Pip. You can search up how to install Pip to whatever system you're using. If you have any other errors, there's always an answer on Google for it!
 
 After doing the pip install command for Snookey2, go into command prompt and type this command:  
-snookey stream subreddit title  
+
+'''snookey stream subreddit title'''
+
 But replace subreddit with the subreddit and title with the stream title.
 
 If done correctly, this will open a link in your browser allowing you to get an access code from Reddit     
