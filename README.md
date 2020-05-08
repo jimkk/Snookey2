@@ -68,7 +68,7 @@ For example:
 
 If your stream title is only one word, you don't need quotation marks.
 
-``snookey stream thegamerlounge onewordtitle```
+```snookey stream thegamerlounge onewordtitle```
 
 If done correctly, this will open a link in your browser allowing you to get an access code from Reddit     
 **NOTE:** The Reddit app you are allowing access is not mine.  It is the client_id for the mobile, in this case android, Reddit app.    
