@@ -42,6 +42,18 @@ Method 2 (Not really recommended unless you want the code for it) - Go to the Gi
 This covers Method 1 of the Installation.  
 Method 2 will not be covered here for simplicity.
 
+Install Python for your system AND MAKE SURE if there's a checkbox that says "Add to Path" check that box. If you don't have that checkbox your most likely not on Windows so it's fine.
+
+After it's done downloading open up your command prompt software (Command Prompt on Windows, Terminal on Mac, whatever on Linux) and do
+
+```python -m pip install snookey2```
+
+If that command doesn't work then try this command:
+
+```python3 -m pip install snookey2```
+
+If that doesn't work, make sure your Python is added to PATH if you're on Windows, or download Pip. You can search up how to install Pip to whatever system you're using. If you have any other errors, there's always an answer on Google for it!
+
 After doing the pip install command for Snookey2, go into command prompt and type this command:  
 snookey stream subreddit title  
 But replace subreddit with the subreddit and title with the stream title.
