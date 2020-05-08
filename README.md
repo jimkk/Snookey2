@@ -60,6 +60,16 @@ After doing the pip install command for Snookey2, go into command prompt and typ
 
 But replace subreddit with the subreddit and title with the stream title.
 
+IMPORTANT NOTE:  
+If you want to do a stream with multiple words in the title you have to put quotation marks around the title.  
+For example:
+
+```snookey stream thegamerlounge "multiple word title"```
+
+If your stream title is only one word, you don't need quotation marks.
+
+``snookey stream thegamerlounge onewordtitle```
+
 If done correctly, this will open a link in your browser allowing you to get an access code from Reddit     
 **NOTE:** The Reddit app you are allowing access is not mine.  It is the client_id for the mobile, in this case android, Reddit app.    
 One way you can confirm that I am not BS'ing you is by looking at [your apps](https://www.reddit.com/prefs/apps/) after allowing access.  
