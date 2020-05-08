@@ -13,11 +13,10 @@ App icon was made by Reddit.
 Thank you for downloading Snookey!
 
 Added:
-- More text in general
 - Discord Rich Presence
 - More descriptive and better looking text
-- Finally figured out how to make it a module lmao
-- Auto closes when getting a stream spot is successful after 1 minute
+- Auto closes when getting a stream spot is successful after 1 hour
+- Finally figured out how to make it a module thanks to help in the Discord!
 - Retries every 2 seconds if requesting a stream spot fails with error message
 
 (Check the Releases tab of this repo to see the full list of changes.)
