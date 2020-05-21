@@ -2,29 +2,56 @@ import sys
 import pytz
 import praw
 import time
+import random
 import requests
 import webbrowser
 from pypresence import Presence
+
+
+def donateinfo():
+    donaterandom = random.randint(1, 3)
+    donaterandom2 = random.randint(1, 5)
+    if donaterandom == donaterandom2:
+        print(69 * "-")
+        print("Like using Snookey2? Donate to the creator to support him!")
+        print("Snookey2 was mainly developed by one person in his free time!")
+        print(
+            'Type "snookey donate" into your command prompt program or copy and paste this link into a web browser: https://ko-fi.com/snookey2')
+        print(
+            "Donating gets you a Donator role in the Discord, Beta Testing for Snookey2 and future projects, a custom thank you message from me, and the removal of this random message.")
+        print("Thank you for Snookey2, and sorry to bother you. Have fun streaming!")
+        print(69 * "-")
+
+
+def donate():
+    webbrowser.open("https://ko-fi.com/snookey2", new=0)
+    print("Thank you so much if you end up donating to me :D")
+    print("")
+
 
 def drp():
     print("Connecting to Discord for Rich Presence...\n")
 
     try:
-      client_id = "694286426338099250"
-      RPC = Presence(client_id)
-      RPC.connect()
-      RPC.update(state="Setting up RPAN stream...", large_image="icon", large_text="Made by u/IOnlyPlayAsDrif", start=int(time.time()))
+        client_id = "694286426338099250"
+        RPC = Presence(client_id)
+        RPC.connect()
+        RPC.update(state="Setting up RPAN stream...", large_image="icon", large_text="Made by u/IOnlyPlayAsDrif",
+                   start=int(time.time()))
     except:
-      print("Failed to connect to Discord, restart the program or try again later to get Rich Presence!")
+        print("Failed to connect to Discord, restart the program or try again later to get Rich Presence!")
+
 
 def discordinit():
     while True:
         try:
-            drpask = input("Would you like to enable Discord Rich Presence?\nIf you say yes, your stream link and title will be put in your Discord status for everyone that looks at it to see!\n")
+            drpask = input(
+                "Would you like to enable Discord Rich Presence?\nIf you say yes, your stream link and title will be put in your Discord status for everyone that looks at it to see!\n")
             drpasklower = drpask.lower()
             if drpasklower == "yes":
                 print("")
                 drp()
+                break
             else:
                 if drpasklower == "no":
                     print("")
@@ -36,54 +63,62 @@ def discordinit():
             print("")
             print("Please input a valid answer.\n")
 
+
 def info():
-    print("Welcome to Snookey2 v3.1 made by u/Spikeedoo and modified by u/IOnlyPlayAsDrif!\n")
+    print("Welcome to Snookey2 v3.2 created by u/IOnlyPlayAsDrif with the original created by u/Spikeedoo!\n")
     print("Snookey2 is now a downloadable Python Module thanks to mingo to make streaming on RPAN more easier!")
-    print("There is also a new video tutorial if you need help using Snookey2 v3.0! Just type 'tutorial' into the prompt!")
-    print("Remember to follow the Reddit TOS and Broadcasting Guidelines here: https://www.redditinc.com/policies/broadcasting-content-policy\n")
+    # print("There is also a new video tutorial if you need help using Snookey2 v3.0! Just type 'tutorial' into the prompt!")
+    print(
+        "Remember to follow the Reddit TOS and Broadcasting Guidelines here: https://www.redditinc.com/policies/broadcasting-content-policy\n")
     print("The app icon is the official logo to RPAN so credit to Reddit for the logo.\n")
-    print("Join the RPAN Discord Server if you need help with Snookey2, or just want to chat with other streamers/viewers!\nhttps://discord.gg/NDfcVkP\n")
+    print(
+        "Join the RPAN Discord Server if you need help with Snookey2, or just want to chat with other streamers/viewers!\nhttps://discord.gg/NDfcVkP\n")
+
 
 def sublist():
     print("")
     print("Here's the list of subreddits for you:")
     print("PAN - The OG subreddit for all livestreams on Wednesday's from Midnight to 5PM PST!")
-    url = "https://pastebin.com/raw/rgsZYPkC"
+    url = "https://raw.githubusercontent.com/IOnlyPlayAsDrift/Snookey2/master/subreddit-list"
     r = requests.get(url)
     content = r.text
     Dict = eval(content)
-    for key,val in Dict.items():
+    for key, val in Dict.items():
         print("")
         print(key + " - " + val)
     print("The list and database get updated whenever they add new subreddits and I have the time to add them.")
 
-def tutorial():
-    webbrowser.open("https://www.youtube.com/watch?v=Oi54fiFOoCI&t=2s", new=0)
+
+# def tutorial():
+# webbrowser.open("https://www.youtube.com/watch?v=Oi54fiFOoCI&t=2s", new=0)
 
 def discord():
     webbrowser.open("https://discord.gg/NDfcVkP", new=0)
 
+
 def chat(subreddit, streamid):
     reddit = praw.Reddit(client_id='yk_0akSBTjExEA',
-                     client_secret='DsBcBc6uTez8nHj3_DSf9FET-yY',
-                     user_agent='RPAN Plays Pokemon Classic v1')
+                         client_secret='DsBcBc6uTez8nHj3_DSf9FET-yY',
+                         user_agent='Snookey Chat Viewer v1')
 
     subreddit = reddit.subreddit(subreddit)
 
     print("Connecting to stream chat...")
     print("Note: Emojis may not render properly, and that's something I can't fix.")
-    print("If no chat messages pop up in here, and there's chat messages being sent that means you made a mistake in the command. Please try again.")
+    print(
+        "If no chat messages pop up in here, and there's chat messages being sent that means you made a mistake in the command. Please try again.")
 
     for comment in subreddit.stream.comments(skip_existing=True, pause_after=0):
         if comment is None:
             continue
         if comment.parent() == streamid:
             try:
-                print(30*"_")
+                print(30 * "_")
                 print(comment.author)
                 print(comment.body)
             except:
                 pass
+
 
 def init(subreddit, title):
     print("Subreddit selected is " + subreddit + ".")
@@ -95,99 +130,108 @@ def init(subreddit, title):
     scope = "*"
     callback = "http://localhost:65010/callback"
     state = "SNOOKEY"
-    request_url = "https://www.reddit.com/api/v1/authorize?client_id=%s&response_type=%s&redirect_uri=%s&scope=%s&state=%s" % (client_id, response_type, callback, scope, state)
+    request_url = "https://www.reddit.com/api/v1/authorize?client_id=%s&response_type=%s&redirect_uri=%s&scope=%s&state=%s" % (
+    client_id, response_type, callback, scope, state)
 
-    #Open browser to get access token
+    # Open browser to get access token
     webbrowser.open(request_url, new=0)
 
-    #Get user input
-    print("The access code can be found after you click Accept and in the URL after it's done loading after the part that says access_token, but DON'T include the = or &.\n")
+    # Get user input
+    print(
+        "The access code can be found after you click Accept and in the URL after it's done loading after the part that says access_token, but DON'T include the = or &.\n")
+    print(
+        'If it says "This site cant be reached" or something like that, you did it correctly most likely and its not an error. Just follow the instruction above.')
     while True:
-      try:
-        user_token = input("Please enter your access token:\nType tutorial for a video tutorial on how to use Snookey!\nType reopen in the field to reopen the webpage if you closed it/didn't load up.\nType discord in the prompt to join the Unoffical RPAN Server for chatting with other streamers and Snookey2 support/bug reports/suggestions!\n")
-        options = user_token.lower()
-        if options == "tutorial":
-          print("")
-          webbrowser.open("https://www.youtube.com/watch?v=Oi54fiFOoCI&t=2s", new=0)
-          continue
-        elif options == "reopen":
-          print("")
-          webbrowser.open(request_url, new=0)
-          continue
-        elif options == "discord":
-            print("")
-            webbrowser.open("https://discord.gg/NDfcVkP", new=0)
-            continue
-        elif len(user_token) < 40:
-          if len(user_token) < 36:
-            print("")
-            ays = input("This access token is in a different format, or you copy and pasted it wrong.\nAre you sure this is correct? Type yes or no to answer:\n")
-            if ays.lower() == "yes":
-              print("")
-              break
-            if ays.lower() == "no":
-              print("")
-              continue
-            else:
-              print("")
-              print("Invalid response inputted. Please try again.")
-              print("")
-              continue
-          else:
+        try:
+            user_token = input(
+                "Please enter your access token:\nType reopen in the field to reopen the webpage if you closed it/didn't load up.\nType discord in the prompt to join the Unoffical RPAN Server for chatting with other streamers and Snookey2 support/bug reports/suggestions!\n")
+            options = user_token.lower()
+            # if options == "tutorial":
+            # print("")
+            # webbrowser.open("https://www.youtube.com/watch?v=Oi54fiFOoCI&t=2s", new=0)
+            # continue
+            if options == "reopen":
+                print("")
+                webbrowser.open(request_url, new=0)
+                continue
+            elif options == "discord":
+                print("")
+                webbrowser.open("https://discord.gg/NDfcVkP", new=0)
+                continue
+            elif len(user_token) < 40:
+                if len(user_token) < 36:
+                    print("")
+                    ays = input(
+                        "This access token is in a different format, or you copy and pasted it wrong.\nAre you sure this is correct? Type yes or no to answer:\n")
+                    if ays.lower() == "yes":
+                        print("")
+                        break
+                    if ays.lower() == "no":
+                        print("")
+                        continue
+                    else:
+                        print("")
+                        print("Invalid response inputted. Please try again.")
+                        print("")
+                        continue
+                else:
+                    break
+            elif user_token[0:8].isdigit() is False:
+                if user_token[0:12].isdigit() is False:
+                    print("")
+                    ays = input(
+                        "This access token is in a different format, or you copy and pasted it wrong.\nAre you sure this is correct? Type yes or no to answer:\n")
+                    if ays.lower() == "yes":
+                        break
+                    if ays.lower() == "no":
+                        print("")
+                        continue
+                    else:
+                        print("")
+                        print("Invalid response inputted. Please try again.")
+                        print("")
+                        continue
+                else:
+                    break
+        except:
+            print("Unexpected error occured, closing program in 10 seconds...")
+            time.sleep(10)
+            sys.exit()
+        else:
             break
-        elif user_token[0:8].isdigit() is False:
-          if user_token[0:12].isdigit() is False:
-            print("")
-            ays = input("This access token is in a different format, or you copy and pasted it wrong.\nAre you sure this is correct? Type yes or no to answer:\n")
-            if ays.lower() == "yes":
-              break
-            if ays.lower() == "no":
-              print("")
-              continue
-            else:
-              print("")
-              print("Invalid response inputted. Please try again.")
-              print("")
-              continue
-          else:
-            break
-      except:
-        print("Unexpected error occured, closing program in 10 seconds...")
-        time.sleep(10)
-        sys.exit()
-      else:
-        break
-      
+
     full_token = "Bearer " + user_token
 
     print("")
     subset = subreddit.lower()
-        
+
     if subset == "thegamerlounge":
         while True:
             try:
                 print("")
-                assure = input("This program is not meant to be used to just do random gaming streams, please use this program for things that are worth the limited spots.\nDO NOT do a boring regular gaming stream.\nIf you're going to do a gaming stream, make sure it has something interesting and fun to it.\nIf you want to do just a normal gaming stream and there's already a bunch of other people doing a normal gaming stream on RPAN, please wait until they're done so RPAN isn't flooded with gaming streams.\n\nType yes if you read the whole thing and understand.\n")
+                assure = input(
+                    "This program is not meant to be used to just do random gaming streams, please use this program for things that are worth the limited spots.\nDO NOT do a boring regular gaming stream.\nIf you're going to do a gaming stream, make sure it has something interesting and fun to it.\nIf you want to do just a normal gaming stream and there's already a bunch of other people doing a normal gaming stream on RPAN, please wait until they're done so RPAN isn't flooded with gaming streams.\n\nType yes if you read the whole thing and understand.\n")
                 assset = assure.lower()
                 if assset == "yes":
                     break
-              
-            except:
-              print("Please type yes or no into the prompt.")
-              continue
-            else:
-              if assset == "no":
-                sys.exit()
-              print("Please type yes or no into the prompt.")
-              continue
 
-    url = "https://pastebin.com/raw/6D92xhca"
+            except:
+                print("Please type yes or no into the prompt.")
+                continue
+            else:
+                if assset == "no":
+                    sys.exit()
+                print("Please type yes or no into the prompt.")
+                continue
+
+    url = "https://raw.githubusercontent.com/IOnlyPlayAsDrift/Snookey2/master/accepted-subreddits"
     r = requests.get(url)
     content = r.text
     while True:
         if subset not in str([content]):
             print("")
-            subnotfound = input("The subreddit you just typed in couldn't be found in this script's database.\nType yes to move on with " + subreddit + " or type no if you made a mistake.\n")
+            subnotfound = input(
+                "The subreddit you just typed in couldn't be found in this script's database.\nType yes to move on with " + subreddit + " or type no if you made a mistake.\n")
             snf = subnotfound.lower()
             if snf == "yes":
                 print("")
@@ -199,11 +243,12 @@ def init(subreddit, title):
                 print("")
                 print("Invalid response. Please try again.")
                 continue
-          
+
         else:
             if subset == "pan":
                 print("")
-                print("RPAN is available on Wednesdays from 1AM-5PM PST (times might change).\nPlease keep this in mind.\n")
+                print(
+                    "RPAN is available on Wednesdays from 1AM-5PM PST (times might change).\nPlease keep this in mind.\n")
                 break
             else:
                 print("")
@@ -213,8 +258,8 @@ def init(subreddit, title):
 
     payload = {}
     headers = {
-      'User-Agent': 'Project SnooKey/0.1',
-      'Authorization': full_token
+        'User-Agent': 'Project SnooKey/0.1',
+        'Authorization': full_token
     }
 
     count = 0
@@ -222,71 +267,81 @@ def init(subreddit, title):
     # Request broadcast slot
     print("Going to start attempting to start up a stream right now...\n")
     while True:
-      token_req = requests.request("POST", url=broadcast_endpoint, headers=headers, data=payload)
+        token_req = requests.request("POST", url=broadcast_endpoint, headers=headers, data=payload)
 
-      if token_req.status_code == 200:
-        # Success!  Stream prepped
-        response = token_req.json()
-        try:
-          RPC.update(state="Streaming " + title + " on r/" + subset + "!", details=response["data"]["post"]["outboundLink"]["url"], large_image="icon", large_text="Made by u/IOnlyPlayAsDrif")
-        except:
-          pass
-        print("")
-        print("Server Link: rtmp://ingest.redd.it/inbound/")
-        print("Your Stream Key: " + response["data"]["streamer_key"])
-        print("DON'T share your Stream Key with anyone.")
-        print("You can put these into your OBS Settings by going to the Stream section of the settings and switching Service to Custom...")
-        print("YOU ARE LIVE: " + response["data"]["post"]["outboundLink"]["url"])
-        print("\nThis program will close in about an hour.\n")
-        time.sleep(180)
-        try:
-            RPC.update(state="Streaming on r/" + subset + " on RPAN!", details=response["data"]["post"]["outboundLink"]["url"], large_image="icon", large_text="Made by u/IOnlyPlayAsDrif", start=int(time.time()))
-        except:
-            pass
-        time.sleep(3600)
-        sys.exit()
+        if token_req.status_code == 200:
+            # Success!  Stream prepped
+            response = token_req.json()
+            try:
+                RPC.update(state="Streaming " + title + " on r/" + subset + "!",
+                           details=response["data"]["post"]["outboundLink"]["url"], large_image="icon",
+                           large_text="Made by u/IOnlyPlayAsDrif")
+            except:
+                pass
+            print("")
+            print("Server Link: rtmp://ingest.redd.it/inbound/")
+            print("Your Stream Key: " + response["data"]["streamer_key"])
+            print("DON'T share your Stream Key with anyone.")
+            print("MAKE SURE you change your stream dimensions to 9:16 or else the stream won't work.")
+            print(
+                "You can put these into your OBS Settings by going to the Stream section of the settings and switching Service to Custom...")
+            print("YOU ARE LIVE: " + response["data"]["post"]["outboundLink"]["url"])
+            print("\nThis program will close in about an hour.\n")
+            time.sleep(180)
+            try:
+                RPC.update(state="Streaming on r/" + subset + " on RPAN!",
+                           details=response["data"]["post"]["outboundLink"]["url"], large_image="icon",
+                           large_text="Made by u/IOnlyPlayAsDrif", start=int(time.time()))
+            except:
+                pass
+            time.sleep(3600)
+            sys.exit()
 
-      
-      else:
-        # Failed
-        if count == 0:
-          try:
-            RPC.update(state="Trying to stream on RPAN...", details="Attempting to stream to r/" + subset + "...", start=int(time.time()), large_image="icon", large_text="Made by u/IOnlyPlayAsDrif")
-            count += 1
-          except:
-            pass
-        print("")
-        print("Stream failed to connect! Trying again in 2 seconds...")
-        try:
-          print("Error message: " + token_req.json()["status"])
-          time.sleep(2)
-        except:
-          print("Error message: Invalid subreddit/access code/broadcast title.\nPlease restart the program and try again.\nThis program will automatically close in 10 seconds.")
-          time.sleep(10)
-          sys.exit()
+
+        else:
+            # Failed
+            if count == 0:
+                try:
+                    RPC.update(state="Trying to stream on RPAN...",
+                               details="Attempting to stream to r/" + subset + "...", start=int(time.time()),
+                               large_image="icon", large_text="Made by u/IOnlyPlayAsDrif")
+                    count += 1
+                except:
+                    pass
+            print("")
+            print("Stream failed to connect! Trying again in 2 seconds...")
+            try:
+                print("Error message: " + token_req.json()["status"])
+                time.sleep(2)
+            except:
+                print(
+                    "Error message: Invalid subreddit/access code/broadcast title.\nPlease restart the program and try again.\nThis program will automatically close in 10 seconds.")
+                time.sleep(10)
+                sys.exit()
 
     # Fix to prevent windows .exe from closing on completion
-    #print("")
-    #aainput("Press enter to exit...")
+    # print("")
+    # aainput("Press enter to exit...")
+
 
 def check_args():
- 
     if len(sys.argv) <= 1:
         info()
-        #show something here when the user gives no arguments
+        # show something here when the user gives no arguments
         return
-        
+
     arg_names = ['filename', 'command', 'var1', 'var2']
     args = dict(zip(arg_names, sys.argv))
-    
+
     if args['command'] == 'stream':
         if 'var2' not in args.keys():
             print('Error. Proper command format: snookey stream subreddit title')
             return
         subreddit = args['var1']
         title = args['var2']
-        #check if subreddit exists here or on top of init
+        # check if subreddit exists here or on top of init
         discordinit()
+        donateinfo()
         init(subreddit, title)
         return
     if args['command'] == 'chat':
@@ -303,16 +358,28 @@ def check_args():
         print("")
         print("List of currently available commands:")
         print("(include the quotation marks in the command if specified)")
-        print("snookey info")
-        print("snookey commands")
-        print('snookey chat subreddit streamid')
-        print('snookey stream subreddit "title"')
+        print("snookey info - Get info on Snookey2!")
+        print("snookey donate - Donate to the Snookey2 developer to support him!")
+        print("snookey version - Get the current version of Snookey2 you're on.")
+        print("snookey commands - Get a list of commands for Snookey2!")
+        print('snookey chat subreddit streamid - Read your stream chat on Snookey2')
+        print('snookey stream subreddit "title" - Stream on RPAN on PC using Snookey!')
         print("")
         print("The Stream ID is the 6 characters after the last / in the URL.")
+        return
+    if args['command'] == 'version':
+        print("You are using Snookey2 v3.2")
         return
     if args['command'] == 'info':
         info()
         return
+    if args['command'] == 'donate':
+        donate()
+        return
+
 
 def main():
     check_args()
+
+
+donateinfo()
