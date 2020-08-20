@@ -5,6 +5,7 @@ import random
 import requests
 import webbrowser
 from pypresence import Presence
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
 # Constants and Globals
 SNOOKEY_VERSION = "3.2"
@@ -174,53 +175,71 @@ def assert_yn(prompt, invalid_msg="\nPlease select a valid answer (\"yes\" or \"
             sys.exit()
 
 
+class Serv(BaseHTTPRequestHandler):
+    global user_token
+    user_token = ''
+    # Get the token from the callback page
+    callbackhtml = open('callback.html', 'r').read()
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        if self.path.startswith('/callback'):
+            self.wfile.write(bytes(self.callbackhtml, 'utf-8'))
+        if self.path.startswith('/submittoken'):
+            self.wfile.write(bytes('<html><body><h1>You may close this tab now.</h1></body></html>', 'utf-8'))
+            global user_token
+            user_token = self.requestline.split(' ')[1].split('?token=')[1]
+
 def get_token():
     # Obtain auth token using 'Reddit for Android' Client ID
     # Open browser to get access token
     webbrowser.open(auth_url, new=0)
-
-    # Get user input
-    print("The access code can be found after you click Accept and in the URL after it's done loading after the part that says access_token, but DON'T include the = or &.\n")
-    print('If it says "This site cant be reached" or something like that, you did it correctly most likely and its not an error. Just follow the instruction above.')
-
     while True:
         try:
-            user_token = input("Please enter your access token:\nType reopen in the field to reopen the webpage if you closed it/didn't load up.\nType discord in the prompt to join the Unoffical RPAN Server for chatting with other streamers and Snookey2 support/bug reports/suggestions!\n")
-            options = user_token.lower()
-            # if options == "tutorial":
-            # print()
-            # webbrowser.open("https://www.youtube.com/watch?v=Oi54fiFOoCI&t=2s", new=0)
-            # continue
-            if options == "reopen":
-                print()
-                webbrowser.open(auth_url, new=0)
-                continue
-            elif options == "discord":
-                print()
-                webbrowser.open(DISCORD_URL, new=0)
-                continue
-            elif len(user_token) < 40:
-                if len(user_token) < 36:
-                    print()
-                    ays = assert_yn("This access token is in a different format, or you copy and pasted it wrong.\nAre you sure this is correct? Type yes or no to answer:\n")
-                    if ays is True:
+            httpd = HTTPServer(('localhost', 65010), Serv)
+            httpd.handle_request()
+            httpd.handle_request()
+
+            global user_token
+            if user_token != '':
+                if len(user_token) < 40:
+                    if len(user_token) < 36:
                         print()
-                        break
+                        ays = assert_yn("This access token is in a different format.\nAre you sure this is correct? Type yes or no to answer:\n")
+                        if ays is True:
+                            print()
+                            break
+                        else:
+                            continue
                     else:
-                        continue
-                else:
-                    break
-            elif user_token[0:8].isdigit() is False:
-                if user_token[0:12].isdigit() is False:
-                    print()
-                    ays = assert_yn("This access token is in a different format, or you copy and pasted it wrong.\nAre you sure this is correct? Type yes or no to answer:\n")
-                    if ays is True:
                         break
-                    else:
+                elif user_token[0:8].isdigit() is False:
+                    if user_token[0:12].isdigit() is False:
                         print()
-                        continue
-                else:
-                    break
+                        ays = assert_yn("This access token is in a different format.\nAre you sure this is correct? Type yes or no to answer:\n")
+                        if ays is True:
+                            break
+                        else:
+                            print()
+                            continue
+                    else:
+                        break
+            else:
+                user_token = input("Token not found\nType reopen in the field to reopen the webpage if you closed it/didn't load up.\nType discord in the prompt to join the Unoffical RPAN Server for chatting with other streamers and Snookey2 support/bug reports/suggestions!\n")
+                options = user_token.lower()
+                # if options == "tutorial":
+                # print()
+                # webbrowser.open("https://www.youtube.com/watch?v=Oi54fiFOoCI&t=2s", new=0)
+                # continue
+                if options == "reopen":
+                    print()
+                    webbrowser.open(auth_url, new=0)
+                    continue
+                elif options == "discord":
+                    print()
+                    webbrowser.open(DISCORD_URL, new=0)
+                    continue
+            
         except BaseException as error:
             if isinstance(error, KeyboardInterrupt):  # Exit immediately if requested
                 sys.exit()
@@ -382,5 +401,5 @@ def main():
     # Main method
     check_args()
 
-
+main()
 donate_info()  # Is called when loaded by another module or when program starts
