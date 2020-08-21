@@ -401,5 +401,4 @@ def main():
     # Main method
     check_args()
 
-main()
 donate_info()  # Is called when loaded by another module or when program starts
